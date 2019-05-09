@@ -340,3 +340,155 @@ def paomadeng():
 paomadeng()
 
 #2019-5-8
+练习2：设计一个函数产生指定长度的验证码，验证码由大小写字母和数字构成。
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+import random
+
+def make_yzm_list(code_long, code_ku):
+	code = []
+	for x in range(code_long):
+		code.append(random.choice(code_ku))
+	return code
+
+def make_yzm_str(code_long, code_ku):
+	code = ''
+	for x in range(code_long):
+		code += random.choice(code_ku)
+	return code
+
+a = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','z','y','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9']
+b = int(input('请输入验证码长度：\n'))
+#print make_yzm_list(b, a)
+print make_yzm_str(b, a)
+
+练习3：设计一个函数返回给定文件名的后缀名。
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+def return_type(file_name):
+	extend = ''
+	for x in file_name[::-1]:
+		if x != '.':
+			extend += x
+		else:
+			break
+	return extend[::-1]
+
+a = raw_input('请输入文件名：\n')
+print '文件后缀名为：' + return_type(a) 
+
+练习4：设计一个函数返回传入的列表中最大和第二大的元素的值。
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+def max_and_second(list):
+	a = 0
+	b = 0
+	for x in list:
+		if x > a:
+			a = x
+	for y in list:
+		if y > b and y != a:
+			b = y
+	return a, b
+a = [1,4,3,5,6,2]
+print max_and_second(a)
+
+练习5：计算指定的年月日是这一年的第几天
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+def is_runyear(year):
+	if year % 4 == 0 and year % 100 != 0 or year % 400 == 0:
+		return True
+	else:
+		return False
+
+def sum_the_days(year,month, day):	
+	sum_day = day
+	for x in range(1, month+1):
+		if x == [6, 8, 9, 11]:
+			days = 30
+		elif x == 2:
+			if is_runyear(year):
+				days = 29
+			else:
+				days = 28
+		else:
+			days = 31
+		sum_day += days
+	return sum_day
+
+a = input('输入年份\n')
+b = input('输入月份\n')
+c = input('输入日份\n')
+print '今年是%d的第%d天\n' %(a, sum_the_days(a, b, c))
+
+练习6：打印杨辉三角。
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+综合案例2：约瑟夫环问题
+"""
+《幸运的基督徒》
+有15个基督徒和15个非基督徒在海上遇险，为了能让一部分人活下来不得不将其中15个人扔到海里面去，有个人想了个办法就是大家围成一个圈，由某个人开始从1报数，报到9的人就扔到海里面，他后面的人接着从1开始报数，报到9的人继续扔到海里面，直到扔掉15个人。由于上帝的保佑，15个基督徒都幸免于难，问这些人最开始是怎么站的，哪些位置是基督徒哪些位置是非基督徒。
+"""
+
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+def lucky_guys():
+	the_line = [1] * 30
+	dead = 0
+	count = 0
+	line_shot = 0
+	while (line_shot < 30):
+		count += 1
+		if count == 9:
+			the_line[line_shot] = 0
+			dead += 1
+			count = 0
+		line_shot += 1
+		if line_shot == 30:
+			line_shot = 0
+		if dead == 15:
+			return the_line
+
+if __name__ == '__main__':
+	print lucky_guys()
+
+综合案例3：井字棋游戏
+
+练习1：定义一个类描述数字时钟
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+import time
+
+class Clock(object):
+	def __init__(self, hours=0, minutes=0, seconds=0):
+		self.hours = hours
+		self.minutes = minutes
+		self.seconds = seconds
+
+	def run(self):
+		self.seconds += 1
+		if self.seconds > 59:
+			self.minutes += 1
+			self.seconds = 0
+		if self.minutes > 59:
+			self.hours += 1
+			self.minutes = 0
+		if self.hours > 23:
+			self.hours = 0
+		
+	def watch(self):
+		print '现在是%d点%d分%d秒\n' %(self.hours, self.minutes, self.seconds)
+
+if __name__ == '__main__':
+	time_now = Clock(23, 59, 58)
+	while(True):
+		time_now.run()
+		time_now.watch()
+		time.sleep(1)
+
+#2019-5-9
