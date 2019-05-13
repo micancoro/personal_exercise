@@ -491,4 +491,55 @@ if __name__ == '__main__':
 		time_now.watch()
 		time.sleep(1)
 
-#2019-5-9
+#2019-5-13
+练习2：定义一个类描述平面上的点并提供移动点和计算到另一个点距离的方法。
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+import math
+
+class Point(object):
+
+	def __init__(self, x=0, y=0):
+		print 'init Ok...'
+		self.x = x
+		self.y = y
+
+	def move_left(self):
+		self.x -= 1
+		print 'now you location is (%d, %d)' %(self.x, self.y)
+
+	def move_right(self):
+		self.x += 1
+		print 'now you location is (%d, %d)' %(self.x, self.y)
+
+	def move_up(self):
+		self.y += 1
+		print 'now you location is (%d, %d)' %(self.x, self.y)
+
+	def move_down(self):
+		self.y -= 1
+		print 'now you location is (%d, %d)' %(self.x, self.y)
+
+	def distance(self, x, y):
+		s = math.sqrt((self.x - x) ** 2 + (self.y - y) ** 2)
+		print 'the distance between (%d, %d) is %d' %(x, y, s)
+
+	def move_to(self, x, y):
+		self.x = x
+		self.y = y
+		print 'now you location is (%d, %d)' %(self.x, self.y)
+
+	def distance_to(self, that):
+		s = math.sqrt(float((self.x - that.x) ** 2 + (self.y - that.y) ** 2))
+		print 'the distance between (%d, %d) is %.1f' %(that.x, that.y, s)		
+
+if __name__ == '__main__':
+	point1 = Point()
+	point1.move_left()
+	point1.move_up()
+
+	point2 = Point()
+	point2.move_to(12,8)
+	point2.distance_to(point1)
+
+#2019-5-14
